@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>2014 CAR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bordo: #7a1f3d;
+  --bordo-dark: #5a1529;
+  --bordo-light: #9e2850;
+  --gold: #c9a84c;
+  --gold-light: #e2c47a;
+  --bg: #0f0f0f;
+  --bg2: #1a1a1a;
+  --bg3: #242424;
+  --bg4: #2e2e2e;
+  --text: #f0f0f0;
+  --text-muted: #888;
+  --green: #2ecc71;
+  --red: #e74c3c;
+  --orange: #e67e22;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, var(--bordo-dark) 0%, var(--bordo) 60%, var(--bordo-light) 100%);
+  padding: 20px 16px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.header-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.header-badge {
+  background: var(--gold);
+  color: var(--bordo-dark);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+
+/* SCREEN HEADER (inside screens) */
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+
+.btn-back {
+  width: 36px;
+  height: 36px;
+  background: var(--bg3);
+  border: none;
+  border-radius: 50%;
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.btn-back:hover { background: var(--bg4); }
+
+.screen-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* MENU */
+#menu {
+  padding: 24px 16px;
+}
+
+.menu-greeting {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.menu-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.menu-card {
+  background: var(--bg2);
+  border: 1px solid var(--bg4);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  transform-origin: left;
+}
+
+.menu-card:hover {
+  background: var(--bg3);
+  border-color: var(--bordo);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.menu-card:hover::before {
+  transform: scaleX(1);
+}
+
+.menu-card:active {
+  transform: translateY(0);
+}
+
+.card-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* SCREENS */
+.screen { display: none; }
+
+/* JUGADOR ROW */
+.player {
+  background: var(--bg2);
+  margin: 6px 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bg4);
+  transition: all 0.15s;
+}
+
+.player.presente {
+  background: rgba(46,204,113,0.1);
+  border-color: rgba(46,204,113,0.3);
+}
+
+.player.ausente {
+  background: rgba(231,76,60,0.08);
+  border-color: rgba(231,76,60,0.25);
+}
+
+.player.lesionado {
+  background: rgba(230,126,34,0.1);
+  border-color: rgba(230,126,34,0.3);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  flex: 1;
+}
+
+.player-status {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.player.presente .player-status { color: var(--green); }
+.player.ausente .player-status { color: var(--red); }
+.player.lesionado .player-status { color: var(--orange); }
+
+.btn-action {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-presente {
+  background: rgba(46,204,113,0.15);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.3);
+}
+.btn-presente:hover { background: rgba(46,204,113,0.25); }
+
+.btn-ausente {
+  background: rgba(231,76,60,0.12);
+  color: var(--red);
+  border: 1px solid rgba(231,76,60,0.25);
+}
+.btn-ausente:hover { background: rgba(231,76,60,0.22); }
+
+.btn-lesion {
+  background: rgba(230,126,34,0.12);
+  color: var(--orange);
+  border: 1px solid rgba(230,126,34,0.25);
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.btn-lesion:hover { background: rgba(230,126,34,0.22); }
+
+.btn-alta {
+  background: rgba(46,204,113,0.12);
+  color: var(--green);
+  border: 1px solid rgba(46,204,113,0.25);
+  font-size: 12px;
+  padding: 5px 10px;
+}
+.btn-alta:hover { background: rgba(46,204,113,0.22); }
+
+/* Minutos partido */
+.min-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.min-display {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 52px;
+  text-align: center;
+}
+
+.btn-min {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--bg4);
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.btn-min:hover { background: var(--bg4); border-color: var(--gold); color: var(--gold); }
+
+/* FOOTER BUTTONS */
+.footer-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg) 70%, transparent);
+}
+
+.btn-guardar {
+  flex: 1;
+  background: linear-gradient(135deg, var(--bordo), var(--bordo-light));
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(122,31,61,0.4);
+}
+.btn-guardar:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(122,31,61,0.5); }
+.btn-guardar:active { transform: translateY(0); }
+
+.btn-volver-footer {
+  background: var(--bg3);
+  color: var(--text-muted);
+  border: 1px solid var(--bg4);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-volver-footer:hover { background: var(--bg4); color: var(--text); }
+
+/* SEPARADOR DE SECCIÓN */
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 16px 6px;
+}
+
+/* ESTADISTICAS */
+.stat-card {
+  background: var(--bg2);
+  margin: 6px 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bg4);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-rank {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-muted);
+  min-width: 28px;
+  text-align: center;
+}
+
+.stat-rank.top3 { color: var(--gold); }
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-nombre {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.stat-bar-wrap {
+  margin-top: 5px;
+  height: 4px;
+  background: var(--bg4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stat-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--bordo), var(--gold));
+  transition: width 0.6s ease;
+}
+
+.stat-nums {
+  text-align: right;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+
+.stat-pct {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-min {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.stats-divider {
+  margin: 12px 16px;
+  border: none;
+  border-top: 1px solid var(--bg4);
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg3);
+  border: 1px solid var(--bg4);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* LESION DETALLE */
+.lesion-detalle {
+  font-size: 11px;
+  color: var(--orange);
+  margin-top: 2px;
+}
+
+/* COUNTER BADGE */
+.counter-badge {
+  display: inline-block;
+  background: var(--bordo);
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* SCROLL */
+.scroll-area {
+  padding-bottom: 90px;
+}
+
+/* LESION MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 500;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-sheet {
+  background: var(--bg2);
+  border-radius: 20px 20px 0 0;
+  padding: 24px 20px 32px;
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.modal-input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--bg4);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.modal-input:focus { border-color: var(--bordo); }
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-modal-confirm {
+  flex: 1;
+  background: var(--bordo);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-modal-confirm:hover { background: var(--bordo-light); }
+
+.btn-modal-cancel {
+  background: var(--bg3);
+  color: var(--text-muted);
+  border: 1px solid var(--bg4);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-modal-cancel:hover { color: var(--text); background: var(--bg4); }
+
+/* Animate players in */
+.player { animation: fadeIn 0.2s ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FILTROS */
+.filtros-wrap {
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filtros-wrap::-webkit-scrollbar { display: none; }
+
+.filtro-pill {
+  flex-shrink: 0;
+  background: var(--bg3);
+  border: 1px solid var(--bg4);
+  color: var(--text-muted);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filtro-pill:hover { border-color: var(--bordo); color: var(--text); }
+.filtro-pill.activo {
+  background: var(--bordo);
+  border-color: var(--bordo);
+  color: white;
+}
+
+/* RESET oculto */
+.reset-zone {
+  padding: 24px 16px 8px;
+  text-align: center;
+}
+.reset-hint {
+  font-size: 11px;
+  color: var(--bg4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px;
+  user-select: none;
+}
+.reset-hint:active { color: var(--red); }
+
+/* TIPO BTN */
+.tipo-btn {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid var(--bg4);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  padding: 8px 4px;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tipo-btn.activo {
+  background: var(--bordo);
+  border-color: var(--bordo);
+  color: white;
+}
+
+/* EVENTO CARD */
+.evento-card {
+  background: var(--bg2);
+  margin: 6px 16px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bg4);
+  border-left: 4px solid var(--bordo);
+}
+.evento-card.viaje { border-left-color: #3498db; }
+.evento-card.alojada { border-left-color: var(--gold); }
+
+.evento-fecha {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.evento-tipo {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.evento-card.partido .evento-tipo { color: var(--bordo-light); }
+.evento-card.viaje .evento-tipo { color: #3498db; }
+.evento-card.alojada .evento-tipo { color: var(--gold); }
+
+.evento-titulo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.evento-detalle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.evento-acciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.btn-evento-edit {
+  background: var(--bg3);
+  border: 1px solid var(--bg4);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-evento-edit:hover { color: var(--text); background: var(--bg4); }
+.btn-evento-del {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.2);
+  color: var(--red);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-evento-del:hover { background: rgba(231,76,60,0.2); }
+
+.eventos-vacio {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <img src="Logo La 2014.png" alt="Escudo CAR" style="width:52px; height:52px; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));">
+      <div>
+        <div class="header-logo">2014 CAR</div>
+        <div class="header-sub">Club Atlético Rosario</div>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div id="conexion-badge" style="font-size:11px; margin-top:4px; color:var(--gold-light); font-family:'Barlow',sans-serif;">⏳ Conectando...</div>
+    </div>
+  </div>
+</header>
+
+<!-- MENU -->
+<div id="menu">
+  <div style="padding: 24px 16px 16px">
+    <div class="menu-greeting">Panel de gestión</div>
+    <div class="menu-title">¿Qué hacemos<br>hoy?</div>
+  </div>
+  <div class="menu-grid" style="padding: 0 16px 24px">
+    <div class="menu-card" onclick="ir('entrenamiento')">
+      <div class="card-icon">🏃</div>
+      <div class="card-label">Entrenamiento</div>
+      <div class="card-desc">Registrar asistencia</div>
+    </div>
+    <div class="menu-card" onclick="ir('partido')">
+      <div class="card-icon">🏉</div>
+      <div class="card-label">Partido</div>
+      <div class="card-desc">Minutos jugados</div>
+    </div>
+    <div class="menu-card" onclick="ir('estadisticas')">
+      <div class="card-icon">📊</div>
+      <div class="card-label">Estadísticas</div>
+      <div class="card-desc">Ranking del plantel</div>
+    </div>
+    <div class="menu-card" onclick="ir('lesiones')">
+      <div class="card-icon">🩹</div>
+      <div class="card-label">Lesiones</div>
+      <div class="card-desc">Estado del plantel</div>
+    </div>
+    <div class="menu-card" onclick="ir('calendario')" style="grid-column: span 2;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="card-icon">📅</div>
+        <div>
+          <div class="card-label">Calendario</div>
+          <div class="card-desc">Partidos · Viajes · Alojadas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reset-zone">
+    <div class="reset-hint" id="resetHint" onclick="resetTap()">· · ·</div>
+  </div>
+</div>
+
+<!-- ENTRENAMIENTO -->
+<div id="entrenamiento" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="volver()">←</button>
+    <div>
+      <div class="screen-title">Entrenamiento</div>
+    </div>
+  </div>
+  <div class="section-label">Marcar asistencia</div>
+  <div id="jugadores" class="scroll-area"></div>
+  <div class="footer-actions">
+    <button class="btn-guardar" onclick="guardarEntrenamiento()">💾 Guardar entrenamiento</button>
+  </div>
+</div>
+
+<!-- PARTIDO -->
+<div id="partido" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="volver()">←</button>
+    <div>
+      <div class="screen-title">Partido</div>
+    </div>
+  </div>
+  <div class="section-label">Minutos jugados</div>
+  <div id="jugadoresPartido" class="scroll-area"></div>
+  <div class="footer-actions">
+    <button class="btn-guardar" onclick="guardarPartido()">💾 Guardar partido</button>
+  </div>
+</div>
+
+<!-- ESTADISTICAS -->
+<div id="estadisticas" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="volver()">←</button>
+    <div>
+      <div class="screen-title">Estadísticas</div>
+    </div>
+  </div>
+  <div class="filtros-wrap">
+    <div class="filtro-pill activo" onclick="setFiltro('todo', this)">Todo</div>
+    <div class="filtro-pill" onclick="setFiltro('semana', this)">Esta semana</div>
+    <div class="filtro-pill" onclick="setFiltro('mes', this)">Este mes</div>
+    <div class="filtro-pill" onclick="setFiltro('3meses', this)">3 meses</div>
+    <div class="filtro-pill" onclick="setFiltro('6meses', this)">6 meses</div>
+  </div>
+  <div class="section-label">🏆 Top 12 — Mayor asistencia</div>
+  <div id="ranking"></div>
+  <hr class="stats-divider">
+  <div class="section-label">📋 Resto del plantel</div>
+  <div id="stats" class="scroll-area"></div>
+  <div class="footer-actions" style="flex-wrap:wrap; gap:8px;">
+    <button class="btn-guardar" onclick="verEstadisticas()" style="flex:1">🔄 Actualizar</button>
+    <button class="btn-guardar" onclick="exportarPDF()" style="flex:1; background:linear-gradient(135deg,#1a472a,#2ecc71)">📄 Bajar PDF</button>
+    <button class="btn-volver-footer" style="width:100%" onclick="volver()">← Volver</button>
+  </div>
+</div>
+
+<!-- LESIONES -->
+<div id="lesiones" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="volver()">←</button>
+    <div>
+      <div class="screen-title">Lesiones</div>
+    </div>
+  </div>
+  <div class="section-label">Estado del plantel</div>
+  <div id="listaLesiones" class="scroll-area"></div>
+  <div class="footer-actions">
+    <button class="btn-volver-footer" style="flex:1" onclick="volver()">← Volver</button>
+  </div>
+</div>
+
+<!-- CALENDARIO -->
+<div id="calendario" class="screen">
+  <div class="screen-header">
+    <button class="btn-back" onclick="volver()">←</button>
+    <div>
+      <div class="screen-title">Calendario</div>
+    </div>
+  </div>
+  <div class="section-label">Próximos eventos</div>
+  <div id="listaCalendario" class="scroll-area"></div>
+  <div class="footer-actions">
+    <button class="btn-guardar" onclick="abrirModalEvento()">＋ Agregar evento</button>
+    <button class="btn-volver-footer" onclick="volver()">← Volver</button>
+  </div>
+</div>
+
+<!-- MODAL EVENTO -->
+<div class="modal-overlay" id="modalEvento">
+  <div class="modal-sheet">
+    <div class="modal-title" id="modalEventoTitle">Nuevo evento</div>
+
+    <div style="margin-bottom:10px;">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Tipo de evento</div>
+      <div style="display:flex;gap:8px;">
+        <button class="tipo-btn activo" onclick="setTipo('partido', this)">🏉 Partido</button>
+        <button class="tipo-btn" onclick="setTipo('viaje', this)">🚌 Viaje</button>
+        <button class="tipo-btn" onclick="setTipo('alojada', this)">🏠 Alojada</button>
+      </div>
+    </div>
+
+    <input class="modal-input" id="eventoFecha" type="date">
+    <input class="modal-input" id="eventoTitulo" placeholder="Rival / Destino / Club visitante..." type="text">
+    <input class="modal-input" id="eventoDetalle" placeholder="Detalles adicionales (opcional)..." type="text">
+
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="cerrarModalEvento()">Cancelar</button>
+      <button class="btn-modal-confirm" onclick="guardarEvento()">Guardar</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modalLesion">
+  <div class="modal-sheet">
+    <div class="modal-title" id="modalLesionTitle">Registrar lesión</div>
+    <input class="modal-input" id="modalLesionInput" placeholder="Descripción de la lesión..." type="text">
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-modal-confirm" onclick="confirmarLesion()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RESET -->
+<div class="modal-overlay" id="modalReset">
+  <div class="modal-sheet">
+    <div class="modal-title" style="color:var(--red)">⚠️ Resetear todo</div>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px;line-height:1.5">Esto va a borrar <strong style="color:var(--text)">todos los entrenamientos, partidos y lesiones</strong> guardados. Esta acción no se puede deshacer.</p>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="cerrarModalReset()">Cancelar</button>
+      <button class="btn-modal-confirm" style="background:var(--red)" onclick="ejecutarReset()">Borrar todo</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/firebase@9.23.0/firebase-app-compat.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/firebase@9.23.0/firebase-database-compat.min.js"></script>
+
+<script>
+
+// FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyBvAnikX77g3P4UQCDqRDmXPWOeqE6J8Fc",
+  authDomain: "rugby-2014.firebaseapp.com",
+  databaseURL: "https://rugby-2014-default-rtdb.firebaseio.com",
+  projectId: "rugby-2014",
+  storageBucket: "rugby-2014.appspot.com",
+  appId: "rugby-2014"
+};
+
+let db = null;
+
+function setBadge(msg, color) {
+  const badge = document.getElementById("conexion-badge");
+  if (badge) { badge.textContent = msg; badge.style.color = color; }
+}
+
+function initFirebase() {
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+    db.ref(".info/connected").on("value", snap => {
+      if (snap.val()) setBadge("🟢 Conectado", "var(--green)");
+      else setBadge("🔴 Sin conexión", "var(--red)");
+    });
+  } catch(e) {
+    console.error("Firebase error:", e);
+    setBadge("🔴 Error: " + e.message, "var(--red)");
+  }
+}
+
+window.addEventListener("load", initFirebase);
+
+// JUGADORES
+const jugadores = [
+  { id:"aguilar_simon", nombre:"Aguilar Simon"},
+  { id:"alonso_martiniano", nombre:"Alonso Martiniano"},
+  { id:"baschera_lucas", nombre:"Baschera Lucas"},
+  { id:"biondo_santino", nombre:"Biondo Santino"},
+  { id:"bruschini_ciro", nombre:"Bruschini Ciro"},
+  { id:"bufarini_filippo", nombre:"Bufarini Filippo"},
+  { id:"castagna_bautista", nombre:"Castagna Bautista"},
+  { id:"cazzaretto_salvatore", nombre:"Cazzaretto Salvatore"},
+  { id:"ceballos_felipe", nombre:"Ceballos Felipe"},
+  { id:"chavez_santino", nombre:"Chavez Santino"},
+  { id:"del_cerro_santiago", nombre:"Del Cerro Santiago"},
+  { id:"fagnani_giovanni", nombre:"Fagnani Giovanni"},
+  { id:"ferrara_martin", nombre:"Ferrara Martin"},
+  { id:"fleming_lucio", nombre:"Fleming Lucio"},
+  { id:"fradegrada_francisco", nombre:"Fradegrada Francisco"},
+  { id:"giannone_maximo", nombre:"Giannone Maximo"},
+  { id:"gonzalez_agustin", nombre:"Gonzalez Agustin"},
+  { id:"gorina_santiago", nombre:"Gorina Santiago"},
+  { id:"guardati_justo", nombre:"Guardati Justo"},
+  { id:"jaime_jeronimo", nombre:"Jaime Jeronimo"},
+  { id:"llovel_facundo", nombre:"Llovel Facundo"},
+  { id:"lopez_maraver_fermin", nombre:"Lopez Maraver Fermin"},
+  { id:"mainella_simon", nombre:"Mainella Simon"},
+  { id:"mejico_felipe", nombre:"Mejico Felipe"},
+  { id:"mondino_matias", nombre:"Mondino Matias"},
+  { id:"mondino_valentin", nombre:"Mondino Valentin"},
+  { id:"morel_gio", nombre:"Morel Gio"},
+  { id:"pontarolo_dante", nombre:"Pontarolo Dante"},
+  { id:"rizzo_benjamin", nombre:"Rizzo Benjamin"},
+  { id:"robins_martino", nombre:"Robins Martino"},
+  { id:"sarquis_leon", nombre:"Sarquis Leon"},
+  { id:"santos_tomas", nombre:"Santos Tomas"},
+  { id:"seperizza_juan", nombre:"Seperizza Juan"},
+  { id:"stefoni_constantino", nombre:"Stefoni Constantino"},
+  { id:"todeschini_galo", nombre:"Todeschini Galo"},
+  { id:"vance_agustin", nombre:"Vance Agustin"},
+  { id:"varela_manuel", nombre:"Varela Manuel"},
+  { id:"vinuela_pedro", nombre:"Viñuela Pedro"},
+  { id:"wetschky_juan_bautista", nombre:"Wetschky Juan Bautista"}
+];
+
+// TOAST
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// NAV
+function ir(p) {
+  document.getElementById("menu").style.display = "none";
+  document.querySelectorAll(".screen").forEach(s => s.style.display = "none");
+  document.getElementById(p).style.display = "block";
+  if (p === "entrenamiento") renderEntrenamiento();
+  if (p === "partido") renderPartido();
+  if (p === "estadisticas") verEstadisticas();
+  if (p === "lesiones") cargarLesiones();
+  if (p === "calendario") cargarCalendario();
+}
+
+function volver() {
+  document.getElementById("menu").style.display = "block";
+  document.querySelectorAll(".screen").forEach(s => s.style.display = "none");
+  estado = {};
+  partidoEstado = {};
+}
+
+// ENTRENAMIENTO
+let estado = {};
+
+function renderEntrenamiento() {
+  const cont = document.getElementById("jugadores");
+  cont.innerHTML = "";
+
+  let presentes = 0, ausentes = 0;
+  jugadores.forEach(j => {
+    if (estado[j.id] === "P") presentes++;
+    if (estado[j.id] === "A") ausentes++;
+  });
+
+  // contador
+  const counter = document.createElement("div");
+  counter.style.cssText = "display:flex; gap:12px; padding:0 16px 10px; font-family:'Barlow Condensed',sans-serif;";
+  counter.innerHTML = `
+    <span style="color:var(--green); font-size:14px; font-weight:700;">✔ ${presentes} presentes</span>
+    <span style="color:var(--red); font-size:14px; font-weight:700;">✘ ${ausentes} ausentes</span>
+    <span style="color:var(--text-muted); font-size:14px;">${jugadores.length - presentes - ausentes} sin marcar</span>
+  `;
+  cont.appendChild(counter);
+
+  jugadores.forEach((j, idx) => {
+    const fila = document.createElement("div");
+    let clase = "player";
+    if (estado[j.id] === "P") clase += " presente";
+    if (estado[j.id] === "A") clase += " ausente";
+    fila.className = clase;
+    fila.style.animationDelay = (idx * 0.02) + "s";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const left = document.createElement("div");
+    const nombre = document.createElement("span");
+    nombre.className = "player-name";
+    nombre.textContent = j.nombre;
+    const statusSpan = document.createElement("span");
+    statusSpan.className = "player-status";
+    statusSpan.textContent = estado[j.id] === "P" ? "PRESENTE" : estado[j.id] === "A" ? "AUSENTE" : "";
+    left.appendChild(nombre);
+    left.appendChild(statusSpan);
+
+    const acciones = document.createElement("div");
+    acciones.style.display = "flex"; acciones.style.gap = "6px";
+
+    const ok = document.createElement("button");
+    ok.className = "btn-action btn-presente";
+    ok.textContent = "✔";
+    ok.onclick = () => { estado[j.id] = "P"; renderEntrenamiento(); };
+
+    const no = document.createElement("button");
+    no.className = "btn-action btn-ausente";
+    no.textContent = "✘";
+    no.onclick = () => { estado[j.id] = "A"; renderEntrenamiento(); };
+
+    acciones.appendChild(ok);
+    acciones.appendChild(no);
+
+    row.appendChild(left);
+    row.appendChild(acciones);
+    fila.appendChild(row);
+    cont.appendChild(fila);
+  });
+}
+
+function guardarEntrenamiento() {
+  if (!db) { showToast("⚠️ Firebase no inicializado - recargá la página"); return; }
+  const fecha = new Date().toISOString().split("T")[0];
+  const key = "ent_" + fecha + "_" + Date.now();
+  const data = {};
+  jugadores.forEach(j => { if (estado[j.id]) data[j.id] = estado[j.id]; });
+  db.ref("entrenamientos/" + key).set(data, err => {
+    if (err) showToast("❌ Error al guardar");
+    else { showToast("✅ Entrenamiento guardado"); estado = {}; renderEntrenamiento(); }
+  });
+}
+
+// PARTIDO
+let partidoEstado = {};
+
+function renderPartido() {
+  const cont = document.getElementById("jugadoresPartido");
+  cont.innerHTML = "";
+
+  let totalMin = 0;
+  jugadores.forEach(j => {
+    if (!partidoEstado[j.id]) partidoEstado[j.id] = { min: 0 };
+    totalMin += partidoEstado[j.id].min;
+  });
+
+  const counter = document.createElement("div");
+  counter.style.cssText = "padding:0 16px 10px; font-family:'Barlow Condensed',sans-serif;";
+  counter.innerHTML = `<span style="color:var(--gold); font-size:14px; font-weight:700;">⏱ ${totalMin} minutos totales registrados</span>`;
+  cont.appendChild(counter);
+
+  jugadores.forEach((j, idx) => {
+    if (!partidoEstado[j.id]) partidoEstado[j.id] = { min: 0 };
+
+    const fila = document.createElement("div");
+    fila.className = "player";
+    if (partidoEstado[j.id].min > 0) fila.classList.add("presente");
+    fila.style.animationDelay = (idx * 0.02) + "s";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const nombre = document.createElement("span");
+    nombre.className = "player-name";
+    nombre.textContent = j.nombre;
+
+    const controls = document.createElement("div");
+    controls.className = "min-controls";
+
+    const btnMinus = document.createElement("button");
+    btnMinus.className = "btn-min";
+    btnMinus.textContent = "−";
+    btnMinus.onclick = () => {
+      if (partidoEstado[j.id].min >= 5) { partidoEstado[j.id].min -= 5; renderPartido(); }
+    };
+
+    const minDisplay = document.createElement("span");
+    minDisplay.className = "min-display";
+    minDisplay.textContent = partidoEstado[j.id].min + "'";
+
+    const btnPlus = document.createElement("button");
+    btnPlus.className = "btn-min";
+    btnPlus.textContent = "+";
+    btnPlus.onclick = () => { partidoEstado[j.id].min += 5; renderPartido(); };
+
+    controls.appendChild(btnMinus);
+    controls.appendChild(minDisplay);
+    controls.appendChild(btnPlus);
+
+    row.appendChild(nombre);
+    row.appendChild(controls);
+    fila.appendChild(row);
+    cont.appendChild(fila);
+  });
+}
+
+function guardarPartido() {
+  if (!db) { showToast("⚠️ Sin conexión a Firebase"); return; }
+  const fecha = new Date().toISOString().split("T")[0];
+  const key = "partido_" + fecha + "_" + Date.now();
+  const jugData = {};
+  jugadores.forEach(j => { if (partidoEstado[j.id] && partidoEstado[j.id].min > 0) jugData[j.id] = partidoEstado[j.id]; });
+  db.ref("partidos/" + key).set({ jugadores: jugData, fecha }, err => {
+    if (err) showToast("❌ Error al guardar");
+    else { showToast("✅ Partido guardado"); partidoEstado = {}; renderPartido(); }
+  });
+}
+
+// LESIONES
+let lesiones = {};
+let lesionJugadorActual = null;
+
+function cargarLesiones() {
+  if (!db) { renderLesiones(); return; }
+  db.ref("lesiones").once("value", snap => {
+    lesiones = snap.val() || {};
+    renderLesiones();
+  });
+}
+
+function renderLesiones() {
+  const cont = document.getElementById("listaLesiones");
+  cont.innerHTML = "";
+
+  const lesionados = jugadores.filter(j => lesiones[j.id]);
+  const sanos = jugadores.filter(j => !lesiones[j.id]);
+
+  if (lesionados.length > 0) {
+    const lbl = document.createElement("div");
+    lbl.className = "section-label";
+    lbl.innerHTML = `🩹 Lesionados <span class="counter-badge">${lesionados.length}</span>`;
+    cont.appendChild(lbl);
+  }
+
+  lesionados.forEach((j, idx) => {
+    const fila = document.createElement("div");
+    fila.className = "player lesionado";
+    fila.style.animationDelay = (idx * 0.02) + "s";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const info = document.createElement("div");
+    const nombre = document.createElement("div");
+    nombre.className = "player-name";
+    nombre.textContent = j.nombre;
+    const detalle = document.createElement("div");
+    detalle.className = "lesion-detalle";
+    detalle.textContent = (lesiones[j.id].detalle || "") + (lesiones[j.id].fecha ? " · " + lesiones[j.id].fecha : "");
+    info.appendChild(nombre);
+    info.appendChild(detalle);
+
+    const alta = document.createElement("button");
+    alta.className = "btn-action btn-alta";
+    alta.textContent = "✔ Alta";
+    alta.onclick = () => {
+      db.ref("lesiones/" + j.id).remove();
+      delete lesiones[j.id];
+      renderLesiones();
+      showToast("✅ " + j.nombre + " dado de alta");
+    };
+
+    row.appendChild(info);
+    row.appendChild(alta);
+    fila.appendChild(row);
+    cont.appendChild(fila);
+  });
+
+  const lbl2 = document.createElement("div");
+  lbl2.className = "section-label";
+  lbl2.innerHTML = `✅ Disponibles <span class="counter-badge" style="background:var(--bg4);color:var(--text-muted)">${sanos.length}</span>`;
+  cont.appendChild(lbl2);
+
+  sanos.forEach((j, idx) => {
+    const fila = document.createElement("div");
+    fila.className = "player";
+    fila.style.animationDelay = (idx * 0.02) + "s";
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const nombre = document.createElement("span");
+    nombre.className = "player-name";
+    nombre.textContent = j.nombre;
+
+    const btn = document.createElement("button");
+    btn.className = "btn-action btn-lesion";
+    btn.textContent = "🩹 Lesionado";
+    btn.onclick = () => abrirModalLesion(j);
+
+    row.appendChild(nombre);
+    row.appendChild(btn);
+    fila.appendChild(row);
+    cont.appendChild(fila);
+  });
+}
+
+function abrirModalLesion(jugador) {
+  lesionJugadorActual = jugador;
+  document.getElementById("modalLesionTitle").textContent = jugador.nombre;
+  document.getElementById("modalLesionInput").value = "";
+  document.getElementById("modalLesion").classList.add("open");
+  setTimeout(() => document.getElementById("modalLesionInput").focus(), 300);
+}
+
+function cerrarModal() {
+  document.getElementById("modalLesion").classList.remove("open");
+  lesionJugadorActual = null;
+}
+
+function confirmarLesion() {
+  if (!lesionJugadorActual) return;
+  const detalle = document.getElementById("modalLesionInput").value.trim() || "Sin detalle";
+  const data = { detalle, fecha: new Date().toISOString().split("T")[0] };
+  lesiones[lesionJugadorActual.id] = data;
+  if (db) db.ref("lesiones/" + lesionJugadorActual.id).set(data);
+  cerrarModal();
+  renderLesiones();
+  showToast("🩹 Lesión registrada");
+}
+
+// FILTROS
+let filtroActual = 'todo';
+
+function setFiltro(f, el) {
+  filtroActual = f;
+  document.querySelectorAll('.filtro-pill').forEach(p => p.classList.remove('activo'));
+  el.classList.add('activo');
+  verEstadisticas();
+}
+
+function getFechaDesde() {
+  const ahora = new Date();
+  if (filtroActual === 'semana') {
+    const d = new Date(ahora);
+    d.setDate(d.getDate() - 7);
+    return d.toISOString().split('T')[0];
+  }
+  if (filtroActual === 'mes') {
+    const d = new Date(ahora);
+    d.setMonth(d.getMonth() - 1);
+    return d.toISOString().split('T')[0];
+  }
+  if (filtroActual === '3meses') {
+    const d = new Date(ahora);
+    d.setMonth(d.getMonth() - 3);
+    return d.toISOString().split('T')[0];
+  }
+  if (filtroActual === '6meses') {
+    const d = new Date(ahora);
+    d.setMonth(d.getMonth() - 6);
+    return d.toISOString().split('T')[0];
+  }
+  return null; // todo
+}
+
+// RESET OCULTO — hay que tocar 5 veces los puntos
+let resetTaps = 0;
+let resetTimer = null;
+function resetTap() {
+  resetTaps++;
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(() => { resetTaps = 0; }, 3000);
+  if (resetTaps >= 5) {
+    resetTaps = 0;
+    confirmarReset();
+  } else if (resetTaps >= 3) {
+    document.getElementById('resetHint').style.color = 'var(--red)';
+    document.getElementById('resetHint').textContent = '⚠️ ' + (5 - resetTaps) + ' más para resetear';
+  }
+}
+function verEstadisticas() {
+  const rankingDiv = document.getElementById("ranking");
+  const statsDiv = document.getElementById("stats");
+  rankingDiv.innerHTML = "<div style='padding:16px;color:var(--text-muted);font-size:14px;'>Cargando...</div>";
+  statsDiv.innerHTML = "";
+
+  if (!db) { rankingDiv.innerHTML = "<div style='padding:16px;color:var(--red);font-size:14px;'>Sin conexión</div>"; return; }
+
+  const fechaDesde = getFechaDesde();
+  let asistencia = {}, minutos = {}, total = 0;
+  jugadores.forEach(j => { asistencia[j.id] = 0; minutos[j.id] = 0; });
+
+  db.ref("entrenamientos").once("value", snap => {
+    const data = snap.val();
+    if (data) {
+      Object.entries(data).forEach(([key, ent]) => {
+        if (fechaDesde) {
+          const partes = key.split('_');
+          const fechaEnt = partes[1];
+          if (fechaEnt && fechaEnt < fechaDesde) return;
+        }
+        total++;
+        jugadores.forEach(j => { if (ent[j.id] === "P") asistencia[j.id]++; });
+      });
+    }
+
+    db.ref("partidos").once("value", snap2 => {
+      const data2 = snap2.val();
+      if (data2) {
+        Object.entries(data2).forEach(([key, p]) => {
+          if (fechaDesde && p.fecha && p.fecha < fechaDesde) return;
+          jugadores.forEach(j => {
+            if (p.jugadores && p.jugadores[j.id]) minutos[j.id] += p.jugadores[j.id].min || 0;
+          });
+        });
+      }
+
+      db.ref("lesiones").once("value", snap3 => {
+        const lesionesData = snap3.val() || {};
+
+        let lista = jugadores.map(j => {
+          const pct = total ? Math.round((asistencia[j.id] / total) * 100) : 0;
+          const estaLesionado = !!lesionesData[j.id];
+          const detalleLesion = estaLesionado ? (lesionesData[j.id].detalle || "") : "";
+          return { nombre: j.nombre, pct, min: minutos[j.id], asis: asistencia[j.id], lesionado: estaLesionado, detalleLesion };
+        });
+
+        lista.sort((a, b) => b.pct - a.pct);
+        rankingDiv.innerHTML = "";
+        statsDiv.innerHTML = "";
+
+        lista.forEach((j, i) => {
+          const card = document.createElement("div");
+          card.className = "stat-card";
+          card.style.animationDelay = (i * 0.03) + "s";
+          card.style.animation = "fadeIn 0.3s ease both";
+          if (j.lesionado) card.style.borderColor = "rgba(230,126,34,0.3)";
+
+          const rank = document.createElement("div");
+          rank.className = "stat-rank" + (i < 3 ? " top3" : "");
+          rank.textContent = i + 1;
+
+          const info = document.createElement("div");
+          info.className = "stat-info";
+          info.innerHTML = `
+            <div class="stat-nombre">${j.nombre} ${j.lesionado ? '<span style="color:var(--orange);font-size:11px;font-weight:700;">🩹 LESIONADO</span>' : ''}</div>
+            ${j.lesionado && j.detalleLesion ? `<div style="font-size:11px;color:var(--orange);margin-bottom:3px;">${j.detalleLesion}</div>` : ''}
+            <div class="stat-bar-wrap">
+              <div class="stat-bar" style="width:${j.pct}%; ${j.lesionado ? 'background:linear-gradient(to right,#7a3000,var(--orange))' : ''}"></div>
+            </div>
+          `;
+
+          const nums = document.createElement("div");
+          nums.className = "stat-nums";
+          nums.innerHTML = `
+            <div class="stat-pct" style="${j.lesionado ? 'color:var(--orange)' : ''}">${j.pct}%</div>
+            <div class="stat-min">${j.min}' jugados</div>
+          `;
+
+          card.appendChild(rank);
+          card.appendChild(info);
+          card.appendChild(nums);
+
+          if (i < 12) rankingDiv.appendChild(card);
+          else statsDiv.appendChild(card);
+        });
+
+        // Guardar lista para PDF
+        window._statsLista = lista;
+        window._statsTotal = total;
+      });
+    });
+  });
+}
+
+// EXPORTAR PDF
+function exportarPDF() {
+  const lista = window._statsLista;
+  if (!lista) { showToast("⚠️ Primero actualizá las estadísticas"); return; }
+
+  const fecha = new Date().toLocaleDateString('es-AR');
+  const total = window._statsTotal || 0;
+
+  let html = `
+    <html><head><meta charset="UTF-8">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; color: #111; }
+      h1 { color: #7a1f3d; font-size: 22px; margin-bottom: 4px; }
+      .sub { color: #888; font-size: 12px; margin-bottom: 20px; }
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th { background: #7a1f3d; color: white; padding: 8px; text-align: left; }
+      td { padding: 7px 8px; border-bottom: 1px solid #eee; }
+      tr:nth-child(even) td { background: #f9f9f9; }
+      .lesionado { color: #e67e22; font-weight: bold; }
+      .top { font-weight: bold; color: #7a1f3d; }
+      .bar-wrap { background: #eee; border-radius: 3px; height: 6px; }
+      .bar { background: #7a1f3d; height: 6px; border-radius: 3px; }
+    </style>
+    </head><body>
+    <h1>🏉 2014 CAR — Estadísticas</h1>
+    <div class="sub">Generado el ${fecha} · Total entrenamientos: ${total}</div>
+    <table>
+      <tr><th>#</th><th>Jugador</th><th>Asistencia</th><th>Minutos</th><th>Estado</th></tr>
+  `;
+
+  lista.forEach((j, i) => {
+    html += `<tr>
+      <td class="${i < 3 ? 'top' : ''}">${i + 1}</td>
+      <td>${j.nombre}</td>
+      <td>
+        <div>${j.pct}%</div>
+        <div class="bar-wrap"><div class="bar" style="width:${j.pct}%"></div></div>
+      </td>
+      <td>${j.min}'</td>
+      <td>${j.lesionado ? `<span class="lesionado">🩹 ${j.detalleLesion || 'Lesionado'}</span>` : '✅ Ok'}</td>
+    </tr>`;
+  });
+
+  html += `</table></body></html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `CAR_2014_estadisticas_${fecha.replace(/\//g,'-')}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("📄 Archivo descargado");
+}
+
+// RESET
+function confirmarReset() {
+  document.getElementById("modalReset").classList.add("open");
+}
+
+function cerrarModalReset() {
+  document.getElementById("modalReset").classList.remove("open");
+}
+
+function ejecutarReset() {
+  if (!db) { showToast("⚠️ Sin conexión"); cerrarModalReset(); return; }
+  db.ref("entrenamientos").remove();
+  db.ref("partidos").remove();
+  db.ref("lesiones").remove();
+  lesiones = {};
+  cerrarModalReset();
+  showToast("🗑️ Todos los datos borrados");
+}
+
+// CALENDARIO
+let eventoTipoActual = 'partido';
+let eventoEditandoId = null;
+
+function cargarCalendario() {
+  if (!db) return;
+  db.ref("calendario").on("value", snap => {
+    renderCalendario(snap.val() || {});
+  });
+}
+
+function renderCalendario(data) {
+  const cont = document.getElementById("listaCalendario");
+  cont.innerHTML = "";
+
+  const eventos = Object.entries(data).sort((a, b) => a[1].fecha > b[1].fecha ? 1 : -1);
+
+  if (eventos.length === 0) {
+    cont.innerHTML = `<div class="eventos-vacio">📅 No hay eventos cargados.<br>Tocá "Agregar evento" para empezar.</div>`;
+    return;
+  }
+
+  const hoy = new Date().toISOString().split('T')[0];
+  const futuros = eventos.filter(([, e]) => e.fecha >= hoy);
+  const pasados = eventos.filter(([, e]) => e.fecha < hoy);
+
+  if (futuros.length > 0) {
+    const lbl = document.createElement("div");
+    lbl.className = "section-label";
+    lbl.textContent = "📅 Próximos";
+    cont.appendChild(lbl);
+    futuros.forEach(([id, e]) => cont.appendChild(crearEventoCard(id, e)));
+  }
+
+  if (pasados.length > 0) {
+    const lbl = document.createElement("div");
+    lbl.className = "section-label";
+    lbl.style.marginTop = "12px";
+    lbl.textContent = "✅ Pasados";
+    cont.appendChild(lbl);
+    pasados.reverse().forEach(([id, e]) => {
+      const card = crearEventoCard(id, e);
+      card.style.opacity = "0.5";
+      cont.appendChild(card);
+    });
+  }
+}
+
+function crearEventoCard(id, e) {
+  const card = document.createElement("div");
+  card.className = `evento-card ${e.tipo}`;
+  const fechaObj = new Date(e.fecha + 'T12:00:00');
+  const fechaStr = fechaObj.toLocaleDateString('es-AR', { weekday:'long', day:'numeric', month:'long' });
+  const tipoLabel = e.tipo === 'partido' ? '🏉 PARTIDO' : e.tipo === 'viaje' ? '🚌 VIAJE' : '🏠 ALOJADA';
+  card.innerHTML = `
+    <div class="evento-fecha">${fechaStr}</div>
+    <div class="evento-tipo">${tipoLabel}</div>
+    <div class="evento-titulo">${e.titulo}</div>
+    ${e.detalle ? `<div class="evento-detalle">${e.detalle}</div>` : ''}
+    <div class="evento-acciones">
+      <button class="btn-evento-edit" onclick="editarEvento('${id}')">✏️ Editar</button>
+      <button class="btn-evento-del" onclick="eliminarEvento('${id}')">🗑️ Borrar</button>
+    </div>
+  `;
+  return card;
+}
+
+function abrirModalEvento() {
+  eventoEditandoId = null;
+  document.getElementById("modalEventoTitle").textContent = "Nuevo evento";
+  document.getElementById("eventoFecha").value = "";
+  document.getElementById("eventoTitulo").value = "";
+  document.getElementById("eventoDetalle").value = "";
+  document.querySelectorAll('.tipo-btn').forEach((b,i) => b.classList.toggle('activo', i===0));
+  eventoTipoActual = 'partido';
+  document.getElementById("modalEvento").classList.add("open");
+}
+
+function editarEvento(id) {
+  db.ref("calendario/" + id).once("value", snap => {
+    const e = snap.val();
+    if (!e) return;
+    eventoEditandoId = id;
+    document.getElementById("modalEventoTitle").textContent = "Editar evento";
+    document.getElementById("eventoFecha").value = e.fecha;
+    document.getElementById("eventoTitulo").value = e.titulo;
+    document.getElementById("eventoDetalle").value = e.detalle || "";
+    const tipos = ['partido','viaje','alojada'];
+    document.querySelectorAll('.tipo-btn').forEach((b,i) => b.classList.toggle('activo', tipos[i]===e.tipo));
+    eventoTipoActual = e.tipo;
+    document.getElementById("modalEvento").classList.add("open");
+  });
+}
+
+function eliminarEvento(id) {
+  if (!db) return;
+  db.ref("calendario/" + id).remove();
+  showToast("🗑️ Evento eliminado");
+}
+
+function setTipo(tipo, el) {
+  eventoTipoActual = tipo;
+  document.querySelectorAll('.tipo-btn').forEach(b => b.classList.remove('activo'));
+  el.classList.add('activo');
+}
+
+function guardarEvento() {
+  const fecha = document.getElementById("eventoFecha").value;
+  const titulo = document.getElementById("eventoTitulo").value.trim();
+  const detalle = document.getElementById("eventoDetalle").value.trim();
+  if (!fecha || !titulo) { showToast("⚠️ Completá fecha y nombre"); return; }
+  const data = { tipo: eventoTipoActual, fecha, titulo, detalle };
+  if (eventoEditandoId) {
+    db.ref("calendario/" + eventoEditandoId).update(data);
+    showToast("✅ Evento actualizado");
+  } else {
+    db.ref("calendario").push(data);
+    showToast("✅ Evento agregado");
+  }
+  cerrarModalEvento();
+}
+
+function cerrarModalEvento() {
+  document.getElementById("modalEvento").classList.remove("open");
+  eventoEditandoId = null;
+}
+
+// Cerrar modales al clickear overlay
+document.getElementById("modalLesion").addEventListener("click", function(e) {
+  if (e.target === this) cerrarModal();
+});
+document.getElementById("modalReset").addEventListener("click", function(e) {
+  if (e.target === this) cerrarModalReset();
+});
+document.getElementById("modalEvento").addEventListener("click", function(e) {
+  if (e.target === this) cerrarModalEvento();
+});
+
+</script>
+</body>
+</html>
